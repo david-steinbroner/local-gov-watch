@@ -2,34 +2,25 @@
 
 > The single resume doc for this project (declared in `CLAUDE.md`). Update in the same commit as any checkpoint.
 
-**Goal:** Pitch-ready by ~2026-10-14 for **investors and paying users**. **North Bay** is the lead region.
-**State (2026-09-14):** On branch `pitch-prep`, not pushed. The Legistar connectors are rewritten on the public API and verified against it, but **not deployed**: the backend is still paused.
-**Next step:** Waiting on David for the three blockers below. Then bring the backend back and run the new connectors for real.
+**Goal:** Pitch-ready by **Mon 2026-10-12**. Paying-user pilots come first, and the investor pitch presents their evidence. **North Bay** is the lead region.
+**Roadmap:** `docs/PLAN.md` (v2, after adversarial review: schedule, decisions D1–D8, cut list). This file holds only current position.
+**State (2026-09-14):** Branch `pitch-prep` is pushed to origin as a backup (not merged; `main` untouched). The Legistar
+connectors are rewritten on the public API and verified against it, but **not deployed**: the backend is still paused.
+**Next step:** The **72-hour test** (`docs/PLAN.md` §3): real connector rows in Postgres plus one real alert email by **Thu 9/17**.
+It's blocked on David's decisions below. Plan tripwire: no correct rows by Fri 9/18 → move the pitch date.
 **Last touched (last commit):** 2026-09-14.
 
-## Blockers (need David)
-1. **Supabase project `dznqgfttchinijhgbxfe` ("Local Gov Watch") is INACTIVE (paused), not deleted.**
-   It was likely paused around Dec 2025, which is past the 90-day free-plan restore window, so the dashboard probably
-   offers only a backup download. Check the dashboard: Restore, or download the backup.
-2. **Org "skunk labs" is at the 2-active-project free cap** (story-mode and marketlark-dev are active).
-   Either upgrade to Pro (recommended: paid projects never pause, daily backups) or pause one of them.
-3. **AI provider** for summaries: Gemini 2.5 Flash direct (today's model) or Claude Haiku 4.5, plus the key.
-   This replaces the Lovable gateway in `supabase/functions/_shared/ai.ts`.
+## Blockers (need David; details in `docs/PLAN.md` §2)
+1. **D1 (today):** org "skunk labs" is at the 2-active-project free cap. Upgrade to Pro (recommended) or pause story-mode or marketlark-dev.
+2. **D2 (today):** Supabase project `dznqgfttchinijhgbxfe` ("Local Gov Watch") is **paused, not deleted**, and likely past the
+   90-day restore window. Open the dashboard. If Restore isn't one click, rebuild from migrations right away.
+3. **D8 (today):** hours per week through 10/12. This sizes the plan.
+4. **D4 + D7 (Wed 9/16):** the ICP (can you name 10 North Bay people in it?) and the redesign scope.
+5. **Outreach (David, starting now):** email 10 North Bay professionals and book 3 conversations this week.
 
-## 4-week plan
-- **Week 1:** Backend back up (restore, or new project from `supabase/migrations`). Redeploy functions and secrets. Recreate cron (it isn't in the migrations). Swap the AI provider. Run the new Legistar connectors. *(Connector rewrite done.)*
-- **Week 2:** The paying-user loop.
-  - Real accounts.
-  - Tracked terms, lists, and stances saved to the DB. The tables already exist (`tracked_term`, `watchlist`, `digest_subscription`, `plan`, `subscription`); the frontend uses sessionStorage today.
-  - Alert emails (Resend).
-  - Guard `/admin/connectors`.
-  - Fix the `DocumentPreview.tsx` hooks bug.
-- **Week 3:**
-  - Data-accuracy pass.
-  - Fix the README coverage claims.
-  - Visible version tag. The first version bump is deliberately deferred to land with it.
-  - Connector freshness monitor.
-- **Week 4:** 5–10 target users hands-on, fix what they hit, then pitch.
+## Plan
+See `docs/PLAN.md`. Current position: **the 72-hour test, day 1**. The connector rewrite is done; the backend is
+blocked on D1/D2. AI summaries are off for the pitch, so the AI provider choice is deferred to week 3.
 
 ## Done
 - **2026-09-14: audit** (findings below).

@@ -1,0 +1,44 @@
+[Claude Code consulting a peer model for a second opinion]
+
+Task: Strategy review, adversarial. A 4-week plan to get "Local Gov Watch" (localgovwatch.com) pitch-ready for investors AND paying users by Mon 2026-10-12. Today is Mon 2026-09-14.
+
+IMPORTANT: Your role is devil's advocate. The developer (via Claude Code) currently believes:
+
+"The attached plan (docs/PLAN.md) is the right plan. In 4 weeks a solo founder working with Claude Code can:
+- restore the backend,
+- ship real accounts plus working email alerts on live North Bay data,
+- carry out a Claude Design redesign of about 9 screens,
+- run 5–10 user sessions,
+- and pitch to both investors and paying users by Oct 12.
+The sequencing (backend → accounts and alerts → redesign → users → pitch) and the scope are right."
+
+Your job is to argue AGAINST this position. Find the strongest counterarguments, identify what could go wrong, surface assumptions that might be wrong, and present the best case for an alternative approach.
+
+Do not hedge or agree. Push back hard. The goal is to stress-test this thinking, not validate it.
+
+Verified context (from a codebase audit on 2026-09-14):
+
+- **Product.** Aggregates local-government meetings, agendas, and legislation into one searchable place, with topic alerts. It was scaffolded in Lovable in Oct 2025 and has been dormant for about 9 months, since Dec 2025.
+- **Stack.** Vite + React + TypeScript + shadcn/Tailwind frontend on Cloudflare Pages, which auto-deploys `main`. Supabase backend: Postgres, 18 Deno edge functions, 41 migrations.
+- **The live site is a shell with no data.** Its Supabase project is paused on the free tier. At about 9 months, it's probably past the 90-day restore window. The org is at its cap of 2 active free projects.
+- **Data.** 4 North Bay jurisdictions, all on Legistar: Sonoma County, Napa County, Santa Rosa, Napa city.
+  - The connectors were just rewritten on Legistar's public Web API and pass tests against the live API. The database write path is untested until the backend is back.
+  - Volume per jurisdiction: roughly 5–25 meetings in a 90-day window, and 190–530 matters per 180 days, mostly consent-calendar items.
+  - Santa Rosa cancels about a third of its meetings.
+- **Accounts.** Login is fake: a "demo user" name stored in sessionStorage.
+  - Saved lists, tracked terms, and stances also live in sessionStorage.
+  - Database tables for tracked terms, watchlists, digest subscriptions, plans, and subscriptions exist but aren't wired to the frontend. `tracked_term` has no `user_id`.
+- **Pricing.** The plans table is seeded with Free / $9.99 / $29.99 / $99.99 tiers. No billing integration.
+- **AI summaries** route through Lovable's gateway and must be replaced.
+- **The founder** is a product manager, not a full-time engineer. Building happens in Claude Code sessions, and the founder has other active projects.
+- **"Claude Design"** is an AI canvas tool that drafts multi-artboard UI mockups the founder can refine visually. The design then has to be implemented in the React codebase.
+
+Structure your response:
+1. The 5 strongest objections, ranked by how likely each is to make the Oct 12 pitch fail. For each, give the failure scenario, the evidence in the plan or context, and the concrete change you'd make.
+2. Which assumptions in the plan are most likely wrong: market, ICP, pricing, timeline, technical.
+3. What you'd cut, and what's missing entirely.
+4. If you think the sequencing is wrong, your alternative plan for the same 4 weeks, in brief.
+5. The single riskiest thing to test in the next 72 hours.
+
+Be specific to this plan. Skip generic startup advice.
+
