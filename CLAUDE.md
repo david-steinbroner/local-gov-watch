@@ -17,11 +17,14 @@ Tracks and surfaces local government activity. Originally scaffolded via Lovable
 npm run dev
 npm run build
 npm run lint
-npm run deploy   # builds and pushes to gh-pages
+npm run deploy   # STALE: still targets gh-pages; real deploy is Cloudflare Pages on push
 ```
 
 ## Deploy
-- Hosted on GitHub Pages via `gh-pages` branch (overrides the umbrella default of Cloudflare Pages / Render).
+- Hosted on Cloudflare Pages at localgovwatch.com (GitHub Pages workflow removed in 3d21c53). Push to `main` ships.
+
+## Resume doc
+`STATUS.md` — the only place for current state / next step.
 
 ## Notes
 - Repo was created in Lovable.
