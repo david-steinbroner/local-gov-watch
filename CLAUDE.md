@@ -17,6 +17,9 @@ Tracks and surfaces local government activity. Originally scaffolded via Lovable
 npm run dev
 npm run build
 npm run lint
+npm test            # vitest unit tests (recorded fixtures, no network)
+npm run test:live   # Legistar mappers against the real API
+npx -y deno@2 check --no-lock supabase/functions/run-connector/index.ts   # type-check edge functions
 npm run deploy   # STALE: still targets gh-pages; real deploy is Cloudflare Pages on push
 ```
 
